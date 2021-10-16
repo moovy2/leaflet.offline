@@ -1,7 +1,10 @@
 import { babel } from '@rollup/plugin-babel';
+import resolve from '@rollup/plugin-node-resolve';
+
+const extensions = ['.ts', '.js'];
 
 export default {
-  input: 'src/index.js',
+  input: 'src/index.ts',
   output: {
     file: 'dist/bundle.js',
     format: 'umd',
@@ -11,6 +14,6 @@ export default {
       idb: 'idb',
     },
   },
-  plugins: [babel({ babelHelpers: 'bundled' })],
+  plugins: [resolve({ extensions }), babel({ babelHelpers: 'bundled', extensions })],
   external: ['leaflet', 'idb'],
 };

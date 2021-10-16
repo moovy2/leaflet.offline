@@ -57,7 +57,7 @@ export async function getStorageLength() {
  *
  * @return {Promise<tileInfo[]>}
  */
-export async function getStorageInfo(urlTemplate) {
+export async function getStorageInfo(urlTemplate: string) {
   const range = IDBKeyRange.only(urlTemplate);
   return (await dbPromise).getAllFromIndex(
     tileStoreName,
@@ -72,10 +72,8 @@ export async function getStorageInfo(urlTemplate) {
  * import { downloadTile } from 'leaflet.offline'
  * downloadTile(tileInfo.url).then(blob => saveTile(tileInfo, blob))
  * ```
- * @param {string} tileUrl
- * @return {Promise<blob>}
  */
-export async function downloadTile(tileUrl) {
+export async function downloadTile(tileUrl: string): Promise<Blob> {
   return fetch(tileUrl).then((response) => {
     if (!response.ok) {
       throw new Error(`Request failed with status ${response.statusText}`);
